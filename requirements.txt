@@ -1,0 +1,9 @@
+# PyTorch + CUDA 11.8 は pip install では別途手動指定が必要なため除外しています
+# → 別途以下で手動インストールしてください:
+# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+
+numpy
+opencv-python
+tqdm
+matplotlib
+ipykernel

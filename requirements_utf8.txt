@@ -1,0 +1,9 @@
+﻿# PyTorch + CUDA 11.8 縺ｯ pip install 縺ｧ縺ｯ蛻･騾疲焔蜍墓欠螳壹′蠢・ｦ√↑縺溘ａ髯､螟悶＠縺ｦ縺・∪縺・
+# 竊・蛻･騾比ｻ･荳九〒謇句虚繧､繝ｳ繧ｹ繝医・繝ｫ縺励※縺上□縺輔＞:
+# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+
+numpy
+opencv-python
+tqdm
+matplotlib
+ipykernel
