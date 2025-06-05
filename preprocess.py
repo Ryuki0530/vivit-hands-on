@@ -1,3 +1,4 @@
+#動画をTensorに変換し、ラベルとともに返す。
 import os
 import cv2
 import torch
@@ -33,4 +34,27 @@ def __getitem__(self, idx):
     """
 
     cap = cv2.VideoCapture(self.video_paths[idx])
-    cv2.VideoCapture.set(cv2.CAP_PROP_POS_FRAMES, 0)
+    total = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    step = max(total // self.num_frames, 1)
+
+    frames = [] # 抽出したフレームを格納するリスト
+
+
+    for i in range(0, total, step):
+        cap.set(cv2.CAP_PROP_POS_FRAMES, i)
+        ret, frame = cap.read()
+        if not ret:
+            break
+        frame = cv2.resize(frame, (224, 224))# sizeをViViTの入力に合わせてリサイズ
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)#RGBに変換
+        frames.append(frame)
+        if len(frames) == self.num_frames:
+            break
+        cap.release()
+
+    frames = np.array(frames).transpose(0, 3, 1, 2)
+
+    frames = torch.tensor(frames /255.0, dtype=torch.float32)
+    label = self.labels[idx]
+    return frames, label
+
